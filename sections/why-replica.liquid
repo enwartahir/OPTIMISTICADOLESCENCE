@@ -1,0 +1,155 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .why-replica__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2.4rem;
+  }
+
+  .why-replica__card {
+    padding: 3rem 2.4rem;
+    border-radius: 8px;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+
+  .why-replica__card-icon {
+    font-size: 3rem;
+    margin-bottom: 1.2rem;
+    display: block;
+  }
+
+  .why-replica__card-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .why-replica__card-text {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    opacity: 0.75;
+  }
+
+  .why-replica__heading {
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+  }
+
+  .why-replica__subheading {
+    font-size: 1.6rem;
+    opacity: 0.7;
+    margin-bottom: 4rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .why-replica__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .why-replica__heading {
+      font-size: 2.4rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+
+    <h2 class="why-replica__heading">{{ section.settings.heading }}</h2>
+    <p class="why-replica__subheading">{{ section.settings.subheading }}</p>
+
+    <div class="why-replica__grid">
+
+      <div class="why-replica__card">
+        <span class="why-replica__card-icon">🏆</span>
+        <h3 class="why-replica__card-title">Official Replica</h3>
+        <p class="why-replica__card-text">An official replica is the real deal — licensed by the brand, manufactured to the same design standards as the match jersey. Same badge, same colors, same cut. The only difference is the fabric grade. This is what the brands sell in their own stores worldwide.</p>
+      </div>
+
+      <div class="why-replica__card">
+        <span class="why-replica__card-icon">⚽</span>
+        <h3 class="why-replica__card-title">Authentic Player Version</h3>
+        <p class="why-replica__card-text">The authentic or player version is what the pros wear on the pitch. It uses elite performance fabrics, aerodynamic cuts, and advanced moisture technology. It costs significantly more. For fans in the stands, a replica gives you the same look at a fraction of the price.</p>
+      </div>
+
+      <div class="why-replica__card">
+        <span class="why-replica__card-icon">🚫</span>
+        <h3 class="why-replica__card-title">Not a Fake</h3>
+        <p class="why-replica__card-text">A counterfeit is an unauthorized copy with no brand licensing, no quality control, and no accountability. Badges peel, stitching unravels, colors fade. Every jersey at INTLFans is sourced from authorized distributors — never from grey markets or counterfeit suppliers.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Why Replica?",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Why Replica?"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Understanding what you're buying — and why it matters."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Replica?"
+    }
+  ]
+}
+{% endschema %}

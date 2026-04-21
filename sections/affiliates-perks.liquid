@@ -1,0 +1,173 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .aff-perks__heading-wrap {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .aff-perks__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .aff-perks__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+
+  .aff-perks__subtext {
+    font-size: 1.6rem;
+    opacity: 0.65;
+    max-width: 500px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .aff-perks__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+  }
+
+  .aff-perks__card {
+    padding: 3rem 2.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .aff-perks__card-icon {
+    font-size: 2.8rem;
+  }
+
+  .aff-perks__card-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .aff-perks__card-text {
+    font-size: 1.4rem;
+    opacity: 0.65;
+    line-height: 1.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .aff-perks__grid {
+      grid-template-columns: 1fr;
+    }
+    .aff-perks__heading { font-size: 2.6rem; }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+
+    <div class="aff-perks__heading-wrap">
+      <p class="aff-perks__label">💰 Why Join Us</p>
+      <h2 class="aff-perks__heading">What You Get as an INTLFans Affiliate</h2>
+      <p class="aff-perks__subtext">We built this program for real fans. Here's what being an INTLFans affiliate actually means.</p>
+    </div>
+
+    <div class="aff-perks__grid">
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">💵</span>
+        <h3 class="aff-perks__card-title">Competitive Commission</h3>
+        <p class="aff-perks__card-text">Earn a generous commission on every sale you refer. The more you share, the more you earn — with no cap on your potential.</p>
+      </div>
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">📊</span>
+        <h3 class="aff-perks__card-title">Real-Time Dashboard</h3>
+        <p class="aff-perks__card-text">Track your clicks, conversions, and earnings in real time. Full transparency — you always know exactly where you stand.</p>
+      </div>
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">🎨</span>
+        <h3 class="aff-perks__card-title">Marketing Assets</h3>
+        <p class="aff-perks__card-text">Get access to ready-to-use creative assets — images, banners, and content ideas — so promoting INTLFans is effortless.</p>
+      </div>
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">⚡</span>
+        <h3 class="aff-perks__card-title">Fast Payouts</h3>
+        <p class="aff-perks__card-text">Get paid on a regular schedule with no unnecessary delays. Your work gets rewarded quickly and consistently.</p>
+      </div>
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">🏆</span>
+        <h3 class="aff-perks__card-title">World Cup 2026 Timing</h3>
+        <p class="aff-perks__card-text">Join now and ride the biggest football event in history. Demand for national team jerseys is at an all-time high heading into 2026.</p>
+      </div>
+
+      <div class="aff-perks__card">
+        <span class="aff-perks__card-icon">🤝</span>
+        <h3 class="aff-perks__card-title">Dedicated Support</h3>
+        <p class="aff-perks__card-text">You're not just a link in a system. Our team is available to help you grow, answer questions, and make sure you succeed.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Affiliates — Perks",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "Affiliates — Perks" }]
+}
+{% endschema %}

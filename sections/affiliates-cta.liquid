@@ -1,0 +1,229 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .aff-cta__wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .aff-cta__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .aff-cta__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .aff-cta__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 1;
+  }
+
+  .aff-cta__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 6rem 3rem;
+    max-width: 680px;
+  }
+
+  .aff-cta__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.65;
+    margin-bottom: 1.6rem;
+    display: block;
+  }
+
+  .aff-cta__heading {
+    font-size: 4.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    color: #fff;
+  }
+
+  .aff-cta__text {
+    font-size: 1.7rem;
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 3.2rem;
+  }
+
+  .aff-cta__buttons {
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .aff-cta__btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.6rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: #fff;
+    color: #111;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .aff-cta__btn-primary:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .aff-cta__btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.6rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.5);
+    border-radius: 4px;
+    text-decoration: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .aff-cta__btn-secondary:hover {
+    border-color: #fff;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .aff-cta__heading { font-size: 2.8rem; }
+    .aff-cta__wrapper { min-height: 400px; }
+    .aff-cta__buttons { flex-direction: column; align-items: center; }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="aff-cta__wrapper">
+
+      {%- if section.settings.image != blank -%}
+        <div class="aff-cta__bg">
+          {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', widths: '750, 1200, 2000' }}
+        </div>
+      {%- endif -%}
+
+      <div class="aff-cta__overlay"></div>
+
+      <div class="aff-cta__content">
+        <span class="aff-cta__label">🚀 Ready to Start?</span>
+        <h2 class="aff-cta__heading">Your Audience Loves Football. Start Earning From It.</h2>
+        <p class="aff-cta__text">World Cup 2026 is coming. Demand is at an all-time high. There's never been a better time to join the INTLFans affiliate program and turn your passion into income.</p>
+        <div class="aff-cta__buttons">
+          <a href="{{ section.settings.primary_url }}" class="aff-cta__btn-primary">
+            {{ section.settings.primary_label }} →
+          </a>
+          <a href="{{ section.settings.secondary_url }}" class="aff-cta__btn-secondary">
+            {{ section.settings.secondary_label }}
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Affiliates — Final CTA",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary Button Label",
+      "default": "Apply Now"
+    },
+    {
+      "type": "url",
+      "id": "primary_url",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary Button Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "secondary_url",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "Affiliates — Final CTA" }]
+}
+{% endschema %}

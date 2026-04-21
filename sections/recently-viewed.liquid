@@ -1,0 +1,212 @@
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'section-related-products.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  #RecentlyViewedSection-{{ section.id }} {
+    display: none;
+  }
+{%- endstyle -%}
+
+{% unless product == empty %}
+<script type="application/json" id="CurrentProductJson-{{ section.id }}">
+  {{ product | json }}
+</script>
+{% endunless %}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div
+    id="RecentlyViewedSection-{{ section.id }}"
+    class="related-products page-width section-{{ section.id }}-padding isolate"
+  >
+    <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
+      {{ section.settings.heading }}
+    </h2>
+    <ul
+      id="RecentlyViewedList-{{ section.id }}"
+      class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+      role="list"
+    ></ul>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  var KEY = 'rv_handles';
+  var MAX = {{ section.settings.products_to_show }};
+
+  // Get current product and save to localStorage
+  var productData = JSON.parse(document.getElementById('CurrentProductJson-{{ section.id }}').innerHTML);
+  var currentHandle = productData.handle;
+
+  var stored = [];
+  try { stored = JSON.parse(localStorage.getItem(KEY) || '[]'); } catch(e) { stored = []; }
+  stored = stored.filter(function(h) { return h !== currentHandle; });
+  stored.unshift(currentHandle);
+  stored = stored.slice(0, 20);
+  try { localStorage.setItem(KEY, JSON.stringify(stored)); } catch(e) {}
+
+  // Show only handles excluding current
+  var toShow = stored.filter(function(h) { return h !== currentHandle; }).slice(0, MAX);
+  if (toShow.length === 0) return;
+
+  var $section = $('#RecentlyViewedSection-{{ section.id }}');
+  var $list = $('#RecentlyViewedList-{{ section.id }}');
+  var loaded = 0;
+  var results = new Array(toShow.length);
+
+  toShow.forEach(function(handle, index) {
+    $.ajax({
+      type: 'GET',
+      url: '/products/' + handle + '.js',
+      dataType: 'json',
+      success: function(p) {
+        results[index] = p;
+      },
+      complete: function() {
+        loaded++;
+        if (loaded === toShow.length) {
+          render(results.filter(Boolean));
+        }
+      }
+    });
+  });
+
+  function render(products) {
+    if (!products.length) return;
+
+    products.forEach(function(p) {
+      var img = p.featured_image
+        ? '<img src="' + p.featured_image + '" alt="' + p.title + '" loading="lazy" style="width:100%;display:block;object-fit:cover;aspect-ratio:1;">'
+        : '';
+
+      var price = p.price_min
+        ? '$' + (p.price_min / 100).toFixed(2) + ' USD'
+        : '';
+
+      var $li = $('<li class="grid__item"></li>');
+      $li.html(
+        '<div class="card-wrapper product-card-wrapper">'
+        + '<div class="card card--standard">'
+        + '<div class="card__inner">'
+        + '<a href="/products/' + p.handle + '" style="display:block;">' + img + '</a>'
+        + '</div>'
+        + '<div class="card__content">'
+        + '<div class="card__information">'
+        + '<h3 class="card__heading h5"><a class="full-unstyled-link" href="/products/' + p.handle + '">' + p.title + '</a></h3>'
+        + '<span class="price-item price-item--regular">' + price + '</span>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+      );
+      $list.append($li);
+    });
+
+    $section.show();
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Recently Viewed",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "default": "Recently Viewed",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1",
+      "label": "Heading Size"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4,
+      "label": "Max Products to Show"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Columns on Desktop"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "Columns on Mobile",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" }
+      ]
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Recently Viewed"
+    }
+  ]
+}
+{% endschema %}

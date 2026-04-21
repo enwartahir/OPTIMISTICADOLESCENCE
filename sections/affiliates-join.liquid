@@ -1,0 +1,167 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .aff-join__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .aff-join__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .aff-join__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .aff-join__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    opacity: 0.75;
+    margin-bottom: 2rem;
+  }
+
+  .aff-join__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.4rem 3.2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .aff-join__cta:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  .aff-join__image {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .aff-join__image img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .aff-join__inner {
+      grid-template-columns: 1fr;
+      gap: 3.2rem;
+    }
+    .aff-join__heading { font-size: 2.6rem; }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="aff-join__inner">
+
+      <div>
+        <p class="aff-join__label">🙌 Join Today</p>
+        <h2 class="aff-join__heading">Rep the Brand. Get Rewarded.</h2>
+        <p class="aff-join__text">The INTLFans Affiliate Program is built for football fans, content creators, influencers, and anyone with an audience that loves the game. Share official replica jerseys with your followers — and earn a commission on every sale you drive.</p>
+        <p class="aff-join__text">No experience needed. No inventory to manage. Just your passion for football and a link to share.</p>
+        <a href="{{ section.settings.cta_url }}" class="aff-join__cta">
+          {{ section.settings.cta_label }} →
+        </a>
+      </div>
+
+      <div class="aff-join__image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 800, 1000' }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Affiliates — Join",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button Label",
+      "default": "Apply Now"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "Affiliates — Join" }]
+}
+{% endschema %}

@@ -1,0 +1,221 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .contact-support__wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-support__icon {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1.6rem;
+  }
+
+  .contact-support__heading {
+    font-size: 3.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.2rem;
+  }
+
+  .contact-support__subtext {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    margin-bottom: 4rem;
+  }
+
+  .contact-support__info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-bottom: 4rem;
+    text-align: left;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    padding: 3rem;
+  }
+
+  .contact-support__info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.6rem;
+    padding-bottom: 1.6rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.08);
+  }
+
+  .contact-support__info-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .contact-support__info-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .contact-support__info-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  .contact-support__info-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+  }
+
+  .contact-support__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .contact-support__cta:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .contact-support__heading {
+      font-size: 2.4rem;
+    }
+
+    .contact-support__info {
+      padding: 2rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="contact-support__wrapper">
+
+      <span class="contact-support__icon">💬</span>
+      <h2 class="contact-support__heading">{{ section.settings.heading }}</h2>
+      <p class="contact-support__subtext">{{ section.settings.subtext }}</p>
+
+      <div class="contact-support__info">
+        <div class="contact-support__info-item">
+          <span class="contact-support__info-icon">⏱️</span>
+          <div>
+            <p class="contact-support__info-title">Response Time</p>
+            <p class="contact-support__info-text">We respond to all messages within 24 hours on business days.</p>
+          </div>
+        </div>
+        <div class="contact-support__info-item">
+          <span class="contact-support__info-icon">📧</span>
+          <div>
+            <p class="contact-support__info-title">What to Include</p>
+            <p class="contact-support__info-text">Have your order number and email address ready. You'll find your order number in your confirmation email from INTLFans.</p>
+          </div>
+        </div>
+        <div class="contact-support__info-item">
+          <span class="contact-support__info-icon">⚽</span>
+          <div>
+            <p class="contact-support__info-title">Who You're Talking To</p>
+            <p class="contact-support__info-text">Real football fans who care about your order. Not a bot, not an automated system.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="{{ section.settings.contact_url }}" class="contact-support__cta">
+        {{ section.settings.button_label }} →
+      </a>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Contact Support",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Still Need Help?"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "If your tracking isn't updating or something doesn't look right, our team is here to sort it out."
+    },
+    {
+      "type": "url",
+      "id": "contact_url",
+      "label": "Contact Page Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contact Support"
+    }
+  ]
+}
+{% endschema %}

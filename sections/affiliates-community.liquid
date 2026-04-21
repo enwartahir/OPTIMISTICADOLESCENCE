@@ -1,0 +1,141 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .aff-community__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .aff-community__image {
+    border-radius: 8px;
+    overflow: hidden;
+    order: 1;
+  }
+
+  .aff-community__image img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+  }
+
+  .aff-community__content {
+    order: 2;
+  }
+
+  .aff-community__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .aff-community__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .aff-community__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    opacity: 0.75;
+    margin-bottom: 1.6rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .aff-community__inner {
+      grid-template-columns: 1fr;
+      gap: 3.2rem;
+    }
+    .aff-community__image { order: 1; }
+    .aff-community__content { order: 2; }
+    .aff-community__heading { font-size: 2.6rem; }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="aff-community__inner">
+
+      <div class="aff-community__image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 800, 1000' }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      <div class="aff-community__content">
+        <p class="aff-community__label">🌍 United by the Game</p>
+        <h2 class="aff-community__heading">A Community Built on Football</h2>
+        <p class="aff-community__text">The INTLFans Affiliate Program is more than earning commissions — it's joining a community of football fans who spread the culture, the energy, and the passion that makes this game global.</p>
+        <p class="aff-community__text">When you show up for the game, the game shows up for you. You create content, share the passion, and push the culture forward — and we make sure you're rewarded for it.</p>
+        <p class="aff-community__text">It's about connection. It's about culture. It's about growing the game together. If you live it, this is your circle. ⚽🏆</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Affiliates — Community",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "Affiliates — Community" }]
+}
+{% endschema %}

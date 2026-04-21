@@ -1,0 +1,174 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .about-mission__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-mission__image {
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    order: 2;
+  }
+
+  .about-mission__image img {
+    width: 100%;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 4/5;
+    height: 800px;
+  }
+
+  .about-mission__content {
+    order: 1;
+  }
+
+  .about-mission__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-mission__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .about-mission__text {
+    font-size: 1.6rem;
+    line-height: 1.8;
+    opacity: 0.75;
+    margin-bottom: 2.4rem;
+  }
+
+  .about-mission__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .about-mission__list li {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .about-mission__list li::before {
+    content: '→';
+    font-weight: 800;
+    opacity: 0.5;
+    flex-shrink: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .about-mission__inner {
+      grid-template-columns: 1fr;
+      gap: 3.2rem;
+    }
+    .about-mission__image { order: 1; }
+    .about-mission__content { order: 2; }
+    .about-mission__heading { font-size: 2.6rem; }
+       .about-mission__image img {
+    height: 500px;
+  }
+  }
+
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="about-mission__inner">
+
+      <div class="about-mission__content">
+        <p class="about-mission__label">🌍 Our Mission</p>
+        <h2 class="about-mission__heading">Built for Every Fan</h2>
+        <p class="about-mission__text">Our mission is simple — to deliver high-quality, stylish, and accessible jerseys that allow every fan to express their love for the game without compromise. Football is a universal language, and we believe everyone deserves to wear their colors with pride.</p>
+        <ul class="about-mission__list">
+          <li>Football lovers who live for matchday</li>
+          <li>Athletes who wear their identity on the pitch</li>
+          <li>Streetwear enthusiasts who bring the game to everyday life</li>
+          <li>Global fans who breathe football across every timezone</li>
+        </ul>
+      </div>
+
+      <div class="about-mission__image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy', widths: '500, 800, 1000' }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About — Mission",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "About — Mission" }]
+}
+{% endschema %}

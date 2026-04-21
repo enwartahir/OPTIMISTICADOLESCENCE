@@ -1,0 +1,133 @@
+.container .acc_ctrl h2, h3, h4 {
+  
+  text-align: left;
+}
+
+p {
+  line-height: calc(1 + 0.8 / var(--font-body-scale));
+ 
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr ;
+  column-gap: calc(var(--grid-desktop-horizontal-spacing)*3);
+  row-gap: var(--grid-desktop-vertical-spacing)
+
+
+
+  
+}
+.acc-col {
+
+}
+
+.acc {
+  margin: 0 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.acc li {
+ 
+  padding: 0;
+}
+
+.acc_ctrl {
+  background: rgba(var(--color-background));
+  border: none;
+  border-bottom: solid 1px rgba(var(--color-foreground), 0.3 );
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 0px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+
+}
+
+.amenity-break {
+  color:
+}
+
+
+.acc_ctrl:before {
+  background: rgb(var(--color-foreground), 0.3);
+  content: "";
+  height: 2px;
+  margin-right: 17px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  transform: rotate(90deg);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  width: 14px;
+}
+
+.acc_ctrl:after {
+  background: rgb(var(--color-foreground), 0.3);
+  content: "";
+  height: 2px;
+  margin-right: 17px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: 14px;
+}
+
+.acc_ctrl.active:before {
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -ms-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+}
+
+.acc_ctrl.active h2,
+.acc_ctrl:focus h2 {
+  position: relative;
+}
+
+.acc_panel {
+  margin-top: 1rem;
+  background: rgba(var(--color-background));
+  border-bottom: solid 1px rgba(var(--color-foreground), 0.3);
+  display: none;
+  overflow: hidden;
+ font-size: 1.4rem;
+}
+@media screen and (min-width: 480px) {
+  .container {
+   
+  
+}
+}
+@media screen and (max-width: 700px) {
+  .container {
+ 
+  grid-template-columns: 1fr;
+}
+}
+
+.product-form__buttons {
+  max-width: 100%;
+}
+
+.product__inventory_quantity {
+  margin-bottom: -1.8rem;
+}
+
+
+
+.caption-with-letter-spacing {
+  color: rgba(var(--color-button));
+}

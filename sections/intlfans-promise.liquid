@@ -1,0 +1,186 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .intlfans-promise__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .intlfans-promise__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .intlfans-promise__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  .intlfans-promise__intro {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    opacity: 0.75;
+  }
+
+  .intlfans-promise__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .intlfans-promise__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.6rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+
+  .intlfans-promise__item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .intlfans-promise__item-icon {
+    font-size: 2.4rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .intlfans-promise__item-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.4rem;
+  }
+
+  .intlfans-promise__item-text {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    opacity: 0.7;
+  }
+
+  @media screen and (max-width: 749px) {
+    .intlfans-promise__inner {
+      grid-template-columns: 1fr;
+      gap: 3.2rem;
+    }
+
+    .intlfans-promise__heading {
+      font-size: 2.6rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="intlfans-promise__inner">
+
+      <div class="intlfans-promise__left">
+        <p class="intlfans-promise__label">Our Promise</p>
+        <h2 class="intlfans-promise__heading">The INTLFans Standard</h2>
+        <p class="intlfans-promise__intro">We started INTLFans because we're fans first. We got burned by bad jerseys, slow shipping, and stores that didn't care. So we built the store we always wanted — one that treats football fans the way they deserve.</p>
+      </div>
+
+      <ul class="intlfans-promise__list">
+        <li class="intlfans-promise__item">
+          <span class="intlfans-promise__item-icon">🏆</span>
+          <div>
+            <p class="intlfans-promise__item-title">Licensed. Always.</p>
+            <p class="intlfans-promise__item-text">Every jersey is officially licensed and sourced from authorized brand distributors. No fakes. No grey market. No compromises.</p>
+          </div>
+        </li>
+        <li class="intlfans-promise__item">
+          <span class="intlfans-promise__item-icon">✈️</span>
+          <div>
+            <p class="intlfans-promise__item-title">Shipped Fast. Tracked Always.</p>
+            <p class="intlfans-promise__item-text">We ship worldwide with full tracking on every order. You'll know exactly where your jersey is, from our warehouse to your door.</p>
+          </div>
+        </li>
+        <li class="intlfans-promise__item">
+          <span class="intlfans-promise__item-icon">🔒</span>
+          <div>
+            <p class="intlfans-promise__item-title">Secure Checkout. Every Time.</p>
+            <p class="intlfans-promise__item-text">SSL encrypted checkout, trusted payment gateways, and zero stored card data. Your purchase is safe from the first click to the last.</p>
+          </div>
+        </li>
+        <li class="intlfans-promise__item">
+          <span class="intlfans-promise__item-icon">⚽</span>
+          <div>
+            <p class="intlfans-promise__item-title">Built by Fans. For Fans.</p>
+            <p class="intlfans-promise__item-text">We watch the games. We feel the losses. We celebrate the goals. This store was built by people who live football — and it shows in everything we do.</p>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "INTLFans Promise",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "INTLFans Promise"
+    }
+  ]
+}
+{% endschema %}

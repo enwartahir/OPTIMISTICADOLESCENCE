@@ -1,0 +1,312 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #marquee-section-{{ section.id }} .marquee-logos__container {
+    animation-duration: {{ section.settings.marquee_speed }}s;
+  }
+
+  #marquee-section-{{ section.id }} .marquee-logos__container img {
+    width: {{ section.settings.logo_width }}rem;
+    height: {{ section.settings.logo_height }}rem;
+    min-width: {{ section.settings.logo_width }}rem;
+    min-height: {{ section.settings.logo_height }}rem;
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div class="color-{{ section.settings.color_scheme }} gradient">
+    <div id="marquee-section-{{ section.id }}" class="section-{{ section.id }}-padding marquee-logos">
+      <div class="marquee-logos__track">
+        <div class="marquee-logos__container" id="marquee-original-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'logo' and block.settings.image != blank -%}
+              {%- assign img_tag = block.settings.image | image_url: width: 400 -%}
+              {%- assign alt = block.settings.image.alt | default: block.settings.alt_text | escape -%}
+
+              {%- if block.settings.link != blank -%}
+                <a
+                  href="{{ block.settings.link }}"
+                  class="marquee-logos__link"
+                  {% if block.settings.open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+                  aria-label="{{ alt | default: 'Logo link' }}"
+                  {{ block.shopify_attributes }}
+                >
+                  <img
+                    src="{{ img_tag }}"
+                    alt="{{ alt }}"
+                    width="{{ section.settings.logo_width | times: 16 }}"
+                    height="{{ section.settings.logo_height | times: 16 }}"
+                    loading="lazy"
+                  >
+                </a>
+              {%- else -%}
+                <span class="marquee-logos__link" {{ block.shopify_attributes }}>
+                  <img
+                    src="{{ img_tag }}"
+                    alt="{{ alt }}"
+                    width="{{ section.settings.logo_width | times: 16 }}"
+                    height="{{ section.settings.logo_height | times: 16 }}"
+                    loading="lazy"
+                  >
+                </span>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+      <div class="marquee-logos__fade marquee-logos__fade-left"></div>
+      <div class="marquee-logos__fade marquee-logos__fade-right"></div>
+    </div>
+  </div>
+{%- endif -%}
+
+<style>
+  @keyframes marquee--move__logos {
+    from { transform: translateX(0%); }
+    to   { transform: translateX(-100%); }
+  }
+
+  .marquee-logos {
+    width: 100%;
+    align-items: center;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .marquee-logos__track {
+    display: flex;
+    width: 100%;
+  }
+
+  .marquee-logos__container {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    white-space: nowrap;
+    will-change: transform;
+    animation: marquee--move__logos linear infinite;
+  }
+
+  .marquee-logos__link {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  a.marquee-logos__link:hover {
+    opacity: 0.7;
+  }
+
+  .marquee-logos__container img {
+    object-fit: contain;
+    display: block;
+  }
+
+  .marquee-logos__fade {
+    z-index: 1;
+    width: 2rem;
+    position: absolute;
+  }
+
+  .marquee-logos__fade-left {
+    background-image: linear-gradient(270deg, rgba(0, 0, 18, 0), #000012);
+    top: 0%; bottom: 0%; left: 0%; right: auto;
+  }
+
+  .marquee-logos__fade-right {
+    background-image: linear-gradient(90deg, rgba(0, 0, 18, 0), #000012);
+    top: 0%; bottom: 0%; left: auto; right: 0%;
+  }
+  .marquee-logos:hover .marquee-logos__container {
+  animation-play-state: paused;
+}
+</style>
+
+<script>
+  (function () {
+    var track = document.querySelector('#marquee-section-{{ section.id }} .marquee-logos__track');
+    var original = document.getElementById('marquee-original-{{ section.id }}');
+    if (!track || !original) return;
+
+    function fillTrack() {
+      track.innerHTML = '';
+      track.appendChild(original);
+
+      var trackWidth = track.parentElement.offsetWidth;
+      var groupWidth = original.scrollWidth;
+
+      if (groupWidth === 0) return;
+
+      var clonesNeeded = Math.ceil((trackWidth * 2) / groupWidth);
+
+      for (var i = 0; i < clonesNeeded; i++) {
+        var clone = original.cloneNode(true);
+        clone.removeAttribute('id');
+        track.appendChild(clone);
+      }
+    }
+
+    var images = original.querySelectorAll('img');
+    var loaded = 0;
+
+    if (images.length === 0) {
+      fillTrack();
+      return;
+    }
+
+    images.forEach(function (img) {
+      if (img.complete) {
+        loaded++;
+        if (loaded === images.length) fillTrack();
+      } else {
+        img.addEventListener('load', function () {
+          loaded++;
+          if (loaded === images.length) fillTrack();
+        });
+        img.addEventListener('error', function () {
+          loaded++;
+          if (loaded === images.length) fillTrack();
+        });
+      }
+    });
+
+    var resizeTimer;
+    window.addEventListener('resize', function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(fillTrack, 200);
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Logo Marquee",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt Text",
+          "info": "Fallback if the image has no alt text. Used for accessibility."
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link URL",
+          "info": "Optional. Leave blank for a non-clickable logo."
+        },
+        {
+          "type": "checkbox",
+          "id": "open_new_tab",
+          "label": "Open link in new tab",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add at least 3 logos for the best marquee experience."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Marquee Settings"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Scroll Speed",
+      "info": "Lower = faster, Higher = slower",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "s",
+      "default": 35
+    },
+    {
+      "type": "header",
+      "content": "Logo Size"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo Width",
+      "min": 6,
+      "max": 48,
+      "step": 2,
+      "unit": "rem",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "label": "Logo Height",
+      "min": 6,
+      "max": 30,
+      "step": 2,
+      "unit": "rem",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo Marquee"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,200 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .aff-how__heading-wrap {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+
+  .aff-how__label {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    opacity: 0.5;
+    margin-bottom: 1.2rem;
+  }
+
+  .aff-how__heading {
+    font-size: 3.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .aff-how__steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.4rem;
+    margin-bottom: 5rem;
+  }
+
+  .aff-how__step {
+    text-align: center;
+    padding: 3.2rem 2.4rem;
+    border: 1px solid rgba(var(--color-foreground), 0.1);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6rem;
+  }
+
+  .aff-how__step-number {
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .aff-how__step-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .aff-how__step-text {
+    font-size: 1.4rem;
+    opacity: 0.65;
+    line-height: 1.7;
+  }
+
+  .aff-how__cta-wrap {
+    text-align: center;
+  }
+
+  .aff-how__cta {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.6rem 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+    border-radius: 4px;
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+  }
+
+  .aff-how__cta:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 749px) {
+    .aff-how__steps {
+      grid-template-columns: 1fr;
+    }
+    .aff-how__heading { font-size: 2.6rem; }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+
+    <div class="aff-how__heading-wrap">
+      <p class="aff-how__label">📋 How It Works</p>
+      <h2 class="aff-how__heading">Three Steps to Start Earning</h2>
+    </div>
+
+    <div class="aff-how__steps">
+
+      <div class="aff-how__step">
+        <div class="aff-how__step-number">1</div>
+        <h3 class="aff-how__step-title">Apply to Join</h3>
+        <p class="aff-how__step-text">Fill in our quick affiliate application. Tell us about yourself, your audience, and how you plan to promote INTLFans. We review every application personally.</p>
+      </div>
+
+      <div class="aff-how__step">
+        <div class="aff-how__step-number">2</div>
+        <h3 class="aff-how__step-title">Get Your Unique Link</h3>
+        <p class="aff-how__step-text">Once approved, you receive your personal affiliate link and access to your dashboard. Track clicks, conversions, and earnings in real time.</p>
+      </div>
+
+      <div class="aff-how__step">
+        <div class="aff-how__step-number">3</div>
+        <h3 class="aff-how__step-title">Share & Earn</h3>
+        <p class="aff-how__step-text">Share your link across your social media, YouTube, TikTok, blog — wherever your audience is. Every sale you drive earns you a commission, paid out regularly.</p>
+      </div>
+
+    </div>
+
+    <div class="aff-how__cta-wrap">
+      <a href="{{ section.settings.cta_url }}" class="aff-how__cta">
+        {{ section.settings.cta_label }} →
+      </a>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Affiliates — How It Works",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button Label",
+      "default": "Apply Now"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "presets": [{ "name": "Affiliates — How It Works" }]
+}
+{% endschema %}

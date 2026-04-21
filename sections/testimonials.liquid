@@ -1,0 +1,458 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+    padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .creative-testimonial--slider {
+    
+  }
+  .slide-avatar {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.slide-avatar img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.slide-avatar::after {
+  content: '\201C';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 44px;
+  background-color: #3c2fc0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 900;
+  padding-bottom: 6px;
+}
+/* 
+.swiper-button-next.slide-btns,
+.swiper-button-prev.slide-btns {
+  color: #3c2fc0 !important;
+  width: 44px !important;
+  height: 44px !important;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.swiper-button-next.slide-btns::after,
+.swiper-button-prev.slide-btns::after {
+  font-size: 16px !important;
+  font-weight: 900 !important;
+} */
+  .creative-testimonial--slider .testimonial-inner {
+    max-width: 1240px;
+    margin-left: auto;
+    margin-right: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .testimonial-inner .testimonial-heading {
+    text-align: center;
+    max-width: 60%;
+    margin: auto;
+    font-size: 2.813rem;
+    line-height: 3.125rem;
+    letter-spacing: -1px;
+    margin-top: 0px;
+    margin-bottom: 50px;
+  }
+  .testimonial-wrap {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 15%;
+  }
+  .swiper-slide .swiper-slide--inner {
+    padding-left: 15%;
+    padding-right: 15%;
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+    position: relative;
+    overflow-x: hidden;
+  }
+  .swiper-slide--inner .slide-avatar img {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .swiper-slide--inner .testimonial-detail img {
+    height: 35px;
+  }
+  .swiper-slide--inner .testimonial-detail p {
+    margin: 0px;
+    color: #242e45;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 500;
+    margin-bottom: 5px;
+    margin-top: 12px;
+  }
+  .swiper-slide--inner .testimonial-detail span {
+    color: #3c2fc0;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 15px;
+    line-height: normal;
+  }
+  .company-details--row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+  }
+  .company-details--row .company-box {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+    padding: 0px 30px;
+  }
+  .company-details--row .company-box .company-box-inner {
+    -webkit-box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+    -webkit-transition: all 350ms cubic-bezier(.37,0,.63,1);
+    transition: all 350ms cubic-bezier(.37,0,.63,1);
+    background: #fff;
+    text-align: center;
+    border-radius: 6px;
+  }
+  .company-heading {
+    text-align: center;
+  }
+  .company-box-inner .company-box-top {
+    padding-top: 7%;
+    padding-bottom: 7%;
+    border-bottom: 1px solid #dee2e6;
+  }
+  .company-box-inner .company-box-top img {
+    height: 60px;
+  }
+  .company-box-inner .company-box-bottom {
+    padding: 15px;
+  }
+  .company-box-inner .company-box-bottom h3 {
+    font-size: 14px;
+    color: #878898;
+    line-height: 5px;
+  }
+  .company-box-inner .company-box-bottom span strong {
+    color: #242e45;
+  }
+  @media only screen and (max-width: 981px) {
+    .creative-testimonial--slider {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    .testimonial-inner .testimonial-heading {
+      max-width: 100%;
+    }
+    .swiper-slide .swiper-slide--inner {
+      padding-left: 0%;
+      padding-right: 0%;
+    }
+    .swiper-button-next.slide-btns,
+    .swiper-button-prev.slide-btns {
+      display: none;
+    }
+    .company-details--row .company-box {
+      padding: 0px 5px;
+    }
+  }
+  @media only screen and (max-width: 460px) {
+    .testimonial-inner .testimonial-heading {
+      font-size: 1.813rem;
+      line-height: 2.125rem;
+    }
+    .swiper-slide .swiper-slide--inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .company-details--row {
+      justify-content: center;
+      flex-direction: column;
+    }
+    .company-details--row .company-box {
+      padding: 0px 0px;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding"
+     {% if section.settings.background_image != blank %}
+          style="background-image: url({{ section.settings.background_image | image_url: width: 1240 }});"
+        {% endif %}
+
+>
+    <section class="creative-testimonial--slider">
+      <div class="testimonial-inner">
+        <div class="testimonial-row">
+
+          {%- if section.settings.heading != blank -%}
+            <h2 class="testimonial-heading">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+
+          <div class="testimonial-wrap">
+            <div class="swiper-container">
+              <div class="swiper-wrapper">
+                {%- for block in section.blocks -%}
+                  {%- if block.type == 'testimonial' -%}
+                    <div class="swiper-slide" {{ block.shopify_attributes }}>
+                      <div class="swiper-slide--inner">
+                        {%- if block.settings.avatar != blank -%}
+                          <div class="slide-avatar">
+                            {{
+                              block.settings.avatar
+                              | image_url: width: 320
+                              | image_tag:
+                                loading: 'lazy',
+                                alt: block.settings.author
+                            }}
+                          </div>
+                        {%- endif -%}
+                        <div class="testimonial-detail">
+                          {%- if block.settings.company_logo != blank -%}
+                            {{
+                              block.settings.company_logo
+                              | image_url: width: 200
+                              | image_tag:
+                                loading: 'lazy',
+                                alt: block.settings.company_name
+                            }}
+                          {%- endif -%}
+                          {%- if block.settings.quote != blank -%}
+                            <p>{{ block.settings.quote }}</p>
+                          {%- endif -%}
+                          {%- if block.settings.author != blank -%}
+                            <span>{{ block.settings.author }}</span>
+                          {%- endif -%}
+                        </div>
+                      </div>
+                    </div>
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+              <div class="swiper-button-next slide-btns"> </div>
+              <div class="swiper-button-prev slide-btns"> </div>
+            </div>
+          </div>
+{% comment %} <h3 class="company-heading">Jerseys Featuring Brands You Trust</h3>
+          <div class="company-details--row">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'brand' -%}
+                <div class="company-box" {{ block.shopify_attributes }}>
+                  <div class="company-box-inner">
+                    <div class="company-box-top">
+                      {%- if block.settings.logo != blank -%}
+                        {{
+                          block.settings.logo
+                          | image_url: width: 200
+                          | image_tag:
+                            loading: 'lazy',
+                            alt: block.settings.label
+                        }}
+                      {%- endif -%}
+                    </div>
+                    <div class="company-box-bottom">
+                      {%- if block.settings.label != blank -%}
+                        <h3>{{ block.settings.label }}</h3>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div> {% endcomment %}
+
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  const swiper = new Swiper('.swiper-container', {
+    loop: true,
+    autoplay: {
+      delay: 4000,
+      disableOnInteraction: false,
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    effect: 'slide',
+  });
+});
+</script>
+
+{% schema %}
+{
+  "name": "Testimonials",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Trusted by the world's biggest football brands"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Customer Photo"
+        },
+        {
+          "type": "image_picker",
+          "id": "company_logo",
+          "label": "Company Logo"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "Absolutely love my jersey. Arrived fast, quality is amazing and looks exactly like the real thing. Will be ordering again before the World Cup!"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author & Company",
+          "default": "Carlos M., Argentina"
+        }
+      ]
+    },
+    {
+      "type": "brand",
+      "name": "Brand Box",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Brand Logo"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label Text",
+          "default": "Official Kit Supplier"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials",
+      "blocks": [
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Absolutely love my Messi jersey. Arrived fast, quality is amazing and looks exactly like the real thing. Will be ordering again before the World Cup!",
+            "author": "Carlos M., Argentina"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "Ordered the Brazil kit for my son. He was over the moon. Great quality, fast shipping and the colors are spot on. IntlFans never disappoints.",
+            "author": "James T., England"
+          }
+        },
+        {
+          "type": "testimonial",
+          "settings": {
+            "quote": "CR7's Portugal jersey is incredible. Exactly what I wanted. Shipped to Spain in days. Perfect quality and fit. Highly recommend IntlFans.",
+            "author": "Sofia R., Spain"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "label": "Official Kit Supplier"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "label": "Official Kit Supplier"
+          }
+        },
+        {
+          "type": "brand",
+          "settings": {
+            "label": "Official Kit Supplier"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

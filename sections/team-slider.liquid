@@ -1,0 +1,349 @@
+{%- style -%}
+  .team-slider-section {
+    position: relative;
+    overflow: hidden;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+
+  .team-slider__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .team-slider__bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .team-slider__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+  }
+
+  .team-slider__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .team-slider__heading {
+    color: #fff;
+    font-size: 4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4rem;
+  }
+
+  .team-slider__track-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .team-slider__track {
+    overflow: hidden;
+    width: 340px;
+  }
+
+  .team-slider__slides {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+
+  .team-slider__slide {
+  min-width: 340px;
+    flex-shrink: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .team-slider__slide a {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .team-slider__slide img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
+
+  .team-slider__slide a:hover img {
+    transform: scale(1.03);
+  }
+
+  .team-slider__slide-label {
+    color: #fff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 1.2rem;
+    display: block;
+  }
+
+  .team-slider__btn {
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .team-slider__btn:hover {
+    background: rgba(255,255,255,0.3);
+    border-color: #fff;
+  }
+
+  .team-slider__btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .team-slider__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2.4rem;
+  }
+
+  .team-slider__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.35);
+    cursor: pointer;
+    transition: background 0.2s ease;
+    border: none;
+    padding: 0;
+  }
+
+  .team-slider__dot.is-active {
+    background: #fff;
+  }
+
+  @media screen and (max-width: 749px) {
+    .team-slider__heading {
+      font-size: 2.6rem;
+    }
+
+    .team-slider__track {
+      width: 260px;
+    }
+
+    .team-slider__slide {
+      min-width: 260px;
+    }
+
+    .team-slider__slide img {
+      height: 300px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="team-slider-section">
+
+  {%- if section.settings.background_image != blank -%}
+    <div class="team-slider__bg">
+      {{
+        section.settings.background_image
+        | image_url: width: 2000
+        | image_tag: loading: 'lazy', widths: '750, 1100, 1500, 2000'
+      }}
+    </div>
+  {%- endif -%}
+
+  <div class="team-slider__overlay"></div>
+
+  <div class="team-slider__content page-width">
+    <h2 class="team-slider__heading">{{ section.settings.heading }}</h2>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="team-slider__track-wrapper">
+
+        <button class="team-slider__btn team-slider__btn--prev" aria-label="Previous">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+
+        <div class="team-slider__track">
+          <div class="team-slider__slides" id="TeamSliderSlides-{{ section.id }}">
+            {%- for block in section.blocks -%}
+              <div class="team-slider__slide" {{ block.shopify_attributes }}>
+                {%- if block.settings.link != blank -%}
+                  <a href="{{ block.settings.link }}">
+                {%- else -%}
+                  <div>
+                {%- endif -%}
+                    {%- if block.settings.image != blank -%}
+                      {{
+                        block.settings.image
+                        | image_url: width: 700
+                        | image_tag: loading: 'lazy', widths: '260, 340, 700'
+                      }}
+                    {%- else -%}
+                      {{ 'product-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                {%- if block.settings.link != blank -%}
+                  </a>
+                {%- else -%}
+                  </div>
+                {%- endif -%}
+                {%- if block.settings.label != blank -%}
+                  <span class="team-slider__slide-label">{{ block.settings.label }}</span>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <button class="team-slider__btn team-slider__btn--next" aria-label="Next">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+      </div>
+
+      <div class="team-slider__dots" id="TeamSliderDots-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          <button class="team-slider__dot{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="Slide {{ forloop.index }}"></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+</section>
+
+<script>
+(function() {
+  var section = document.querySelector('.team-slider-section');
+  if (!section) return;
+
+  var slides = section.querySelector('#TeamSliderSlides-{{ section.id }}');
+  var dots = section.querySelectorAll('#TeamSliderDots-{{ section.id }} .team-slider__dot');
+  var prevBtn = section.querySelector('.team-slider__btn--prev');
+  var nextBtn = section.querySelector('.team-slider__btn--next');
+  var total = {{ section.blocks.size }};
+  var current = 0;
+
+  function goTo(index) {
+    if (index < 0) index = total - 1;
+    if (index >= total) index = 0;
+    current = index;
+    slides.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('is-active', i === current);
+    });
+  }
+
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() { goTo(parseInt(dot.dataset.index)); });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Team Slider",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose Your Team"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Argentina"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Team Slider",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

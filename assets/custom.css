@@ -1,0 +1,313 @@
+
+.card__inner {
+  position: relative;
+}
+    .card__variants-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    padding: 10px 8px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 2;
+    }
+
+    .card-wrapper:hover .card__variants-hover,
+    .card__inner:hover .card__variants-hover {
+    opacity: 1;
+    transform: translateY(0);
+    }
+
+    .card__variant-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    height: 32px;
+    padding: 0 10px;
+    background: #fff;
+    color: #121212;
+    font-size: 11px;
+    font-weight: 700;
+    border-radius: 4px;
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: background 0.15s ease, color 0.15s ease;
+    white-space: nowrap;
+    border: none;
+    }
+
+    .card__variant-btn:hover {
+    background: #121212;
+    color: #fff;
+    }
+
+    .card__variant-btn--sold {
+    opacity: 0.4;
+    text-decoration: line-through;
+    cursor: not-allowed;
+    pointer-events: none;
+    }
+
+    .card__variants-hover {
+  z-index: 2;
+}
+
+    .card__variants-hover a {
+  text-decoration: none !important;
+}
+
+.card__variant-btn {
+  position: relative;
+  z-index: 3;
+}
+
+.card__heading a::after {
+  pointer-events: none;
+}
+
+a.card__media {
+  display: block;
+  text-decoration: none;
+}
+
+.card .card__inner .card__media {
+    z-index: 1;
+}
+
+.cart-item__details a {
+    font-size: 1.2rem;
+}
+.cart-item__details a:hover {
+    text-decoration: none !important;
+    font-weight: bold;
+}
+
+.page-width-extended {
+  max-width: 90%;
+  margin: 0 auto;
+  /* padding: 0 1.5rem; */
+}
+/* .new-slider {
+    display: flex;
+} */
+
+/* ============================================
+   PRODUCT PAGE — VERTICAL THUMBNAILS (LEFT)
+   ============================================ */
+
+@media screen and (min-width: 750px) {
+
+  /* Make media-gallery a flex row */
+  media-gallery {
+    display: grid !important;
+    grid-template-columns: 1fr 4fr !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .thumbnail-slider .thumbnail-list.slider--tablet-up {
+    align-items: center !important;
+  }
+
+  /* Main viewer — takes remaining space, sits on right */
+  [id^="GalleryViewer"] {
+    flex: 1 !important;
+    min-width: 0 !important;
+    order: 2 !important;
+  }
+
+  /* Thumbnail slider — fixed width, sits on left */
+  [id^="GalleryThumbnails"] {
+    order: 1 !important;
+    /* width: 76px !important; */
+    flex-shrink: 0 !important;
+  }
+
+  /* Stack thumbnails vertically */
+  [id^="GalleryThumbnails"] .thumbnail-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    overflow-y: auto !important;
+    max-height: 560px !important;
+    scrollbar-width: none !important;
+  }
+
+  [id^="GalleryThumbnails"] .thumbnail-list::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* Each thumbnail item — square */
+  [id^="GalleryThumbnails"] .thumbnail-list__item {
+    width: 130px !important;
+    height: 130px !important;
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+  }
+
+  [id^="GalleryThumbnails"] .thumbnail-list__item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+  }
+
+  /* Hide the horizontal prev/next slider buttons — not needed vertically */
+  [id^="GalleryThumbnails"] .slider-buttons {
+    display: none !important;
+  }
+
+  /* Remove horizontal scroll snap from thumbnail list */
+  [id^="GalleryThumbnails"] .thumbnail-list {
+    scroll-snap-type: none !important;
+    overflow-x: visible !important;
+  }
+
+  /* Thumbnail item — remove horizontal snap */
+  [id^="GalleryThumbnails"] .thumbnail-list__item {
+    scroll-snap-align: none !important;
+  }
+
+  .product__title h1 {
+    font-size: 3rem !important;
+    line-height: 1.5 !important;
+  }
+  /* ============================================
+   PRODUCT PAGE — THUMBNAIL SLIDER BUTTONS VERTICAL
+   ============================================ */
+   .thumbnail-slider {
+    flex-direction: column !important;
+   }
+   product--thumbnail_slider {
+    flex-direction: column !important;
+   }
+   .slider-button--prev .icon {
+    transform: rotate(180deg) !important;
+   }
+   .slider-button--next .icon {
+    transform: rotate(0deg) !important;
+   }
+     [id^="GalleryThumbnails"] .slider-button--prev,
+  [id^="GalleryThumbnails"] .slider-button--next {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    color: rgba(var(--color-button) ) !important;
+  }
+
+  [id^="GalleryThumbnails"] .slider-button[disabled] {
+    pointer-events: auto !important;
+    color: rgba(var(--color-foreground), 0.75) !important;
+    cursor: pointer !important;
+  }
+
+  [id^="GalleryThumbnails"] .slider-button[disabled] .icon {
+    color: rgba(var(--color-foreground), 0.75) !important;
+    cursor: pointer !important;
+  }
+}
+@media screen and (min-width: 749px) {
+.intl-footer-grid {
+  display: grid !important;
+  grid-template-columns: 2fr 1fr 1fr 1fr !important;
+}
+.footer-block {
+  max-width: 70% !important;
+}
+}
+
+.header__menu-item span {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+}
+.header--middle-left {
+  grid-template-columns: auto 1fr auto ;
+  justify-items: center ;
+}
+
+/* ============================================
+   TABLET FIXES — min-width 1330px
+   ============================================ */
+
+@media screen and (min-width: 1330px) {
+.custom-mobile {
+  display: none !important;
+}
+
+}
+
+/* ============================================
+   TABLET FIXES — max-width 1330px
+   ============================================ */
+
+@media screen and (max-width: 1330px) {
+.custom-desktop {
+  display: none !important;
+}
+
+}
+/* ============================================
+   MOBILE FIXES — max-width 749px
+   ============================================ */
+
+@media screen and (max-width: 749px) {
+
+    .page-width-extended {
+  max-width: 95%;
+}
+ .product__title h1 {
+    font-size: 2rem !important;
+    line-height: 1.5 !important;
+  }
+  /* --- Countdown digits --- */
+  .digit {
+    width: 10vw;
+    height: 12vw;
+    font-size: 10vw;
+    border-radius: 1.5vw;
+  }
+
+  .clock__label {
+    font-size: 3vw;
+  }
+
+  .clock {
+    
+    width: 96%;
+  }
+
+  .clock__digits {
+    gap: 1vw;
+  }
+
+  .clock-wrapper {
+    height: 70vh;
+    gap: 6%;
+  }
+
+  #marquee-section-template--19676244443201__logo_marquee_NbcYJq .marquee-logos__container img {
+        width: 12rem;
+    height: 10rem;
+    min-width: 12rem;
+    min-height: 10rem;
+  }
+
+  /* --- Variant hover buttons on mobile — show always --- */
+  .card__variants-hover {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+  .banner__box .subtitle {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+    .banner__box .banner__heading h2 {
+    font-size: 2.5rem;
+    line-height: 1.5;
+  }
+}
