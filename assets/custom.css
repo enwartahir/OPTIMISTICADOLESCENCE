@@ -89,6 +89,15 @@ a.card__media {
     text-decoration: none !important;
     font-weight: bold;
 }
+.optimistic-pills {
+  display: grid;
+}
+.link {
+  text-decoration: none !important;
+}
+.footer__content-bottom {
+  display: none !important;
+}
 
 .page-width-extended {
   max-width: 90%;
@@ -108,7 +117,7 @@ a.card__media {
   /* Make media-gallery a flex row */
   media-gallery {
     display: grid !important;
-    grid-template-columns: 1fr 4fr !important;
+    grid-template-columns: 1fr 8fr !important;
     align-items: center !important;
     gap: 12px !important;
   }
@@ -136,7 +145,7 @@ a.card__media {
     flex-direction: column !important;
     gap: 8px !important;
     overflow-y: auto !important;
-    max-height: 560px !important;
+    max-height: 709px !important;
     scrollbar-width: none !important;
   }
 
@@ -147,7 +156,7 @@ a.card__media {
   /* Each thumbnail item — square */
   [id^="GalleryThumbnails"] .thumbnail-list__item {
     width: 130px !important;
-    height: 130px !important;
+    height: 168px !important;
     flex-shrink: 0 !important;
     margin: 0 !important;
   }
@@ -214,7 +223,7 @@ a.card__media {
 @media screen and (min-width: 749px) {
 .intl-footer-grid {
   display: grid !important;
-  grid-template-columns: 2fr 1fr 1fr 1fr !important;
+  grid-template-columns: 3fr 1fr 1fr 1fr 3fr !important;
 }
 .footer-block {
   max-width: 70% !important;

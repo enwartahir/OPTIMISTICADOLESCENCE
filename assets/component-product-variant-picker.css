@@ -73,6 +73,7 @@ variant-selects {
   transition: border var(--duration-short) ease;
   cursor: pointer;
   position: relative;
+  width: 7rem;
 }
 
 .product-form__input--pill input[type='radio'] + label:before {

@@ -414,6 +414,11 @@
 
 .footer-block__brand-info {
   text-align: left;
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    align-items: flex-start
 }
 
 .footer-block:only-child .footer-block__brand-info {

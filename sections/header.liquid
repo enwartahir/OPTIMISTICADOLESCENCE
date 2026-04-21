@@ -45,6 +45,7 @@
   .list-menu--inline {
     display: inline-flex;
     flex-wrap: wrap;
+    gap: 3rem;
   }
 
   summary.list-menu__item {
@@ -74,7 +75,7 @@
 
 {%- style -%}
   .header {
-    padding: {{ section.settings.padding_top | times: 0.5 | round: 0 }}px 3rem {{ section.settings.padding_bottom | times: 0.5 | round: 0 }}px 3rem;
+  
   }
 
   .section-header {
@@ -232,10 +233,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      <div class="custom-desktop">
-      {% render 'search-bar' %}
-      </div>
-      <div class="custom-mobile">
+          <div class="">
        {% render 'header-search', input_id: 'Search-In-Modal' %}
       </div>
 
@@ -248,9 +246,9 @@
           {%- if section.settings.enable_customer_avatar -%}
             <account-icon>
               {%- if customer and customer.has_avatar? -%}
-                {{ customer | avatar }}
+                ACCOUNT
               {%- else -%}
-                <span class="svg-wrapper">{{ 'icon-account.svg' | inline_asset_content }}</span>
+                <span class="svg-wrapper">ACCOUNT</span>
               {%- endif -%}
             </account-icon>
           {%- else -%}
@@ -277,7 +275,7 @@
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link focus-inset" >
           {% if cart == empty %}
-            <span class="svg-wrapper">{{'icon-cart-empty.svg' | inline_asset_content }}</span>
+            <span class="svg-wrapper">CART (0)</span>
           {% else %}
             <span class="svg-wrapper">{{'icon-cart.svg' | inline_asset_content }}</span>
           {% endif %}
